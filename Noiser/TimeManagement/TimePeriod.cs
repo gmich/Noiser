@@ -6,7 +6,7 @@ namespace Noiser.TimeManagement
     internal class TimePeriod
     {
         public void TimerCallback(object state) { }
-        public TimePeriod()
+        public TimePeriod(DateTime start, DateTime end)
         {
             var t = new Timer(TimerCallback);
 

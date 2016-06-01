@@ -1,13 +1,16 @@
-﻿
+﻿using System;
+using System.Diagnostics;
+
 namespace Noiser.Sources
 {
     internal class OnlineNoise : INoiseSource
     {
-        private readonly string url;
+        private readonly Uri uri;
 
-        public OnlineNoise(string url)
+        public OnlineNoise(Uri uri)
         {
-            this.url = url;
+            DebugArgument.Require.NotNull(() => uri);
+            this.uri = uri;
         }
     
 

@@ -2,7 +2,7 @@
 using NLog.Config;
 using NLog.Targets;
 
-namespace Noiser.Infrastructure
+namespace Noiser
 {
     internal class ConsoleNLogTarget
     {

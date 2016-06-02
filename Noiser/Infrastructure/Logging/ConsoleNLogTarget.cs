@@ -12,7 +12,7 @@ namespace Noiser
             var cfg = new LoggingConfiguration();
             var consoleTarget = new ColoredConsoleTarget();
             cfg.AddTarget("console", consoleTarget);
-            consoleTarget.Layout = consoleLayout;
+            consoleTarget.Layout = "${message}";
             cfg.LoggingRules.Add(new LoggingRule("*", LogLevel.Trace, consoleTarget));
             LogManager.Configuration = cfg;
             LogManager.ThrowExceptions = true;

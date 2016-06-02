@@ -2,6 +2,6 @@
 {
     internal interface ISourceFactory
     {
-        Result<INoiseSource> GetSource(string source);
+        Result<INoiseSource> GetSource(string id, string source);
     }
 }

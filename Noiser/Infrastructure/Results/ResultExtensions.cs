@@ -166,6 +166,18 @@ namespace Noiser
 
         #region Misc
 
+        public static Result<TValue> Log<TValue>(this Result<TValue> result,Action<string> logger,string msg = "")
+        {
+            logger(msg + result.ErrorMessage);
+            return result;
+        }
+
+        public static Result Log(this Result result, Action<string> logger, string msg = "")
+        {
+            logger(msg + result.ErrorMessage);
+            return result;
+        }
+
         public static Result<TValue> As<TValue>(this Result result)
         {
             return new Result<TValue>(default(TValue), result.State, result.ErrorMessage);
@@ -214,6 +226,12 @@ namespace Noiser
         public static Result OnBoth(this Result result, Action action)
         {
             action();
+            return result;
+        }
+
+        public static Result OnBoth(this Result result, Action<Result> action)
+        {
+            action(result);
             return result;
         }
 

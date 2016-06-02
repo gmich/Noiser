@@ -79,9 +79,11 @@
     <Compile Include="Configuration\NoiserConfig.cs" />
     <Compile Include="Infrastructure\Assertions\Argument.cs" />
     <Compile Include="Infrastructure\CompilationSymbol.cs" />
+    <Compile Include="Infrastructure\DelegateDisposable.cs" />
     <Compile Include="Infrastructure\InfrastructureModule.cs" />
     <Compile Include="Infrastructure\Logging\ConsoleNLogTarget.cs" />
     <Compile Include="Infrastructure\Assertions\DebugArgument.cs" />
+    <Compile Include="Infrastructure\ObjectExtensions.cs" />
     <Compile Include="Infrastructure\Results\GenericResult.cs" />
     <Compile Include="Infrastructure\Results\Result.cs" />
     <Compile Include="Infrastructure\Results\ResultExtensions.cs" />

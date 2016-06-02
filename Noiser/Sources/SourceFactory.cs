@@ -8,27 +8,33 @@ namespace Noiser.Sources
     {
         private static Logger logger = LogManager.GetLogger("SourceFactory");
 
-        public Result<INoiseSource> GetSource(string source)
+        public Result<INoiseSource> GetSource(string id, string source)
         {
             INoiseSource noiseSource = null;
+
             TryGetUri(source)
             .OnSuccess(uri =>
             {
-                logger.Info($"Configured new online noise: {uri}");
-                noiseSource = new OnlineNoise(uri);
+                logger.Info($"Configured new online noise: {id} , {uri}");
+                noiseSource = new OnlineNoise(id, uri);
             })
             .OnFailure(res =>
                 TryGetPath(source)
                 .OnSuccess(path =>
                 {
-                    logger.Info($"Configured new local noise: {path}");
-                    noiseSource = new LocalNoise(path);
+                    logger.Info($"Configured new local noise: {id} , {path}");
+                    noiseSource = new LocalNoise(id, path);
                 })
-            )
-            .OnFailure(res =>
-                logger.Info($"Unable to configure noise source: {source}. {res.ErrorMessage}"));
+            );
 
-            return Result.FailIfNull(noiseSource);
+            if (noiseSource == null)
+            {
+                var errorMessage = $"Unable to configure noise source: {id} ,{source}";
+                logger.Error(errorMessage);
+                return Result.FailWith<INoiseSource>(State.Error, errorMessage);
+            }
+
+            return Result.Ok(noiseSource);
 
         }
         private Result<Uri> TryGetUri(string uri)

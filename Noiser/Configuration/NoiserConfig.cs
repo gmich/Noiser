@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace Noiser.Configuration
@@ -22,6 +23,16 @@ namespace Noiser.Configuration
 
             [JsonProperty("source")]
             public string Source { get; set; }
+
+            public override string ToString()
+            {
+                return this.DynamicToString();
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"{Settings.ToString()}{Environment.NewLine}{String.Concat(Noise.Select(n =>n.ToString() + Environment.NewLine))}"; 
         }
     }
 
@@ -34,6 +45,11 @@ namespace Noiser.Configuration
 
             [JsonProperty("to")]
             public DateTime To { get; set; }
+
+            public override string ToString()
+            {
+                return this.DynamicToString();
+            }
         }
 
         [JsonProperty("time")]
@@ -50,6 +66,11 @@ namespace Noiser.Configuration
 
         [JsonProperty("durationMinutes")]
         public double DurationMinutes { get; set; }
+
+        public override string ToString()
+        {
+            return this.DynamicToString();
+        }
     }
 
     [JsonConverter(typeof(StringEnumConverter))]

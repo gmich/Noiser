@@ -58,9 +58,6 @@ namespace Noiser.Configuration
         [JsonProperty("order")]
         public NoiseOrder Order { get; set; }
 
-        [JsonProperty("repeat")]
-        public bool Repeat { get; set; }
-
         [JsonProperty("intervalMinutes")]
         public double IntervalMinutes { get; set; }
 

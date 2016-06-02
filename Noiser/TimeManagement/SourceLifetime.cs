@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 
 namespace Noiser.TimeManagement
 {
+
     public class SourceLifetime<TItem>
     {
 
@@ -24,26 +25,28 @@ namespace Noiser.TimeManagement
             this.cycleMinutes = cycleMinutes;
             this.durationMinutes = durationMinutes;
         }
-
+        
         public void Begin()
         {
             var observable = Observable.Interval(TimeSpan.FromMinutes(cycleMinutes));
+            logger.Trace("Starting cycle ");
 
             cleanup = observable.Delay(TimeSpan.FromMinutes(durationMinutes)).Subscribe(time =>
             {
-                logger.Info("Firing with delay");
+                logger.Trace("Ending interval ");
                 intervalEnd(item);
             });
 
             start = observable.Subscribe(x =>
             {
-                logger.Info("Subscribed");
+                logger.Trace("Starting Interval ");
                 item = intervalStart();
             });
         }
 
         public void End()
         {
+            logger.Trace("Ending cycle ");
             start.Dispose();
             cleanup.Dispose();
             try
@@ -51,6 +54,14 @@ namespace Noiser.TimeManagement
                 intervalEnd(item);
             }
             catch { }
+        }
+    }
+
+    public static class SourceLifeTime
+    {
+        public static SourceLifetime<T> For<T>(Func<T> intervalStart, Action<T> intervalEnd, double cycleMinutes, double durationMinutes)
+        {
+            return new SourceLifetime<T>(intervalStart, intervalEnd, cycleMinutes, durationMinutes);
         }
     }
 }

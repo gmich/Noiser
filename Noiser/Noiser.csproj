@@ -91,14 +91,18 @@
     <Compile Include="NoiserPipeline.cs" />
     <Compile Include="Sources\INoiseSource.cs" />
     <Compile Include="Sources\ISourceFactory.cs" />
+    <Compile Include="Sources\Selectors\ISourceSelector.cs" />
     <Compile Include="Sources\OnlineNoise.cs" />
     <Compile Include="Sources\LocalNoise.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\Selectors\RandomSourceSelector.cs" />
+    <Compile Include="Sources\Selectors\SequentialSourceSelector.cs" />
     <Compile Include="Sources\SourceFactory.cs" />
     <Compile Include="Sources\SourcesModule.cs" />
     <Compile Include="TimeManagement\SourceLifetime.cs" />
-    <Compile Include="TimeManagement\TimePeriod.cs" />
+    <Compile Include="TimeManagement\InMemoryScheduler.cs" />
+    <Compile Include="TimeManagement\Statistics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
